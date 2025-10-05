@@ -1,0 +1,2085 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WMEK - Premium IT Consulting & Digital Transformation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* Premium Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(8, 8, 12, 0.92);
+            backdrop-filter: blur(40px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Ultra Sophisticated Motto */
+        .motto-symphony {
+            position: relative;
+            margin: 2rem;
+            padding: 2.5rem 3.5rem;
+            background: linear-gradient(145deg,
+                    rgba(0, 0, 0, 0.6) 0%,
+                    rgba(15, 23, 42, 0.4) 50%,
+                    rgba(0, 0, 0, 0.6) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            backdrop-filter: blur(30px);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .motto-symphony::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.05),
+                    transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .luxury-motto {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.08em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .motto-word {
+            display: inline-block;
+            position: relative;
+            margin: 0 0.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .motto-word:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .think {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.4));
+            animation: thinkPulse 4s ease-in-out infinite;
+        }
+
+        .separator {
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2em;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
+            animation: separatorGlow 3s ease-in-out infinite;
+        }
+
+        .dream {
+            background: linear-gradient(135deg, #06b6d4, #67e8f9, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.4));
+            animation: dreamShimmer 5s ease-in-out infinite;
+        }
+
+        .arrow {
+            background: linear-gradient(135deg, #10b981, #34d399, #6ee7b7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.4em;
+            font-weight: 700;
+            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+            animation: arrowPulse 2s ease-in-out infinite;
+        }
+
+        .we-make {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24, #fcd34d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.15em;
+            font-weight: 800;
+            filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.5));
+            animation: weMakeGlow 3.5s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes thinkPulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.4));
+                transform: scale(1);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.7));
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes separatorGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 35px rgba(139, 92, 246, 0.8));
+            }
+        }
+
+        @keyframes dreamShimmer {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.4));
+                background-position: 0% 50%;
+            }
+
+            50% {
+                filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.6));
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes arrowPulse {
+
+            0%,
+            100% {
+                transform: scale(1) translateX(0);
+                filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+            }
+
+            50% {
+                transform: scale(1.1) translateX(3px);
+                filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.7));
+            }
+        }
+
+        @keyframes weMakeGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.5));
+                transform: scale(1);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 40px rgba(245, 158, 11, 0.8)) drop-shadow(0 0 60px rgba(245, 158, 11, 0.3));
+                transform: scale(1.03);
+            }
+        }
+
+        /* Premium Logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 180px;
+            height: 50px;
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.4));
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            margin: 0;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-nav {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.35);
+        }
+
+        /* Hero Motto Styles */
+        .hero-motto {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0 2.5rem 0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .motto-think {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4));
+            animation: mottoGlow 3s ease-in-out infinite alternate;
+        }
+
+        .motto-separator {
+            color: #60a5fa;
+            font-weight: 300;
+            font-size: 1.3rem;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .motto-dream {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+            animation: mottoGlow 3s ease-in-out infinite alternate 1s;
+        }
+
+        .motto-arrow {
+            color: #3b82f6;
+            font-size: 1.3rem;
+            font-weight: 400;
+            animation: arrowPulse 1.5s ease-in-out infinite;
+        }
+
+        .motto-make {
+            background: linear-gradient(135deg, #1e40af, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 12px rgba(30, 64, 175, 0.5));
+            animation: mottoGlow 3s ease-in-out infinite alternate 2s;
+            position: relative;
+        }
+
+        .motto-make::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #1e40af, #60a5fa);
+            border-radius: 1px;
+            animation: underlineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes mottoGlow {
+            0% {
+                filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.3));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.8));
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes arrowPulse {
+
+            0%,
+            100% {
+                transform: translateX(0);
+                filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
+            }
+
+            50% {
+                transform: translateX(5px);
+                filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 120px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff 20%, #3b82f6 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text .accent {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            padding: 1.2rem 3rem;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Premium Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+        }
+
+        .premium-grid {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(15, 15, 25, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.6s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.1);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 10rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 20%, #3b82f6 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: rgba(15, 15, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.5s ease;
+            position: relative;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 25px 60px rgba(59, 130, 246, 0.1);
+            background: rgba(15, 15, 25, 0.8);
+        }
+
+        .service-icon {
+            width: 72px;
+            height: 72px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.3));
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .service-card p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .service-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background: #3b82f6;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+
+        /* About Section */
+        .about {
+            padding: 10rem 0;
+            background: rgba(255, 255, 255, 0.005);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff 20%, #3b82f6 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: rgba(15, 15, 25, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #3b82f6;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(96, 165, 250, 0.03));
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 20%, #3b82f6 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            /* overscroll-behavior-inline: auto; */
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            margin-top: 25rem;
+            margin-bottom: 2rem;
+            background: rgba(15, 15, 25, 0.95);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(40px);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+
+        }
+
+        ::picker(select) {
+            appearance: base-select;
+            background: rgba(255, 255, 255, 0.05);
+
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background-color: rgba(255, 255, 255, 0.08);
+
+
+        }
+
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn-cancel {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ffffff;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(5, 5, 10, 0.95);
+            backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #3b82f6;
+            padding-left: 8px;
+        }
+
+        .contact-info p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 2rem;
+            }
+
+            .modal-actions {
+                justify-content: stretch;
+            }
+
+            .modal-actions button {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="canvas-container"></div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo-container">
+                    <svg class="logo" viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Premium WMEK text -->
+                        <text x="8" y="32" font-family="Playfair Display" font-size="28" font-weight="800"
+                            fill="url(#logoGradient)" filter="url(#glow)">WMEK</text>
+
+                        <!-- Geometric elements -->
+                        <g stroke="url(#logoGradient)" stroke-width="1.5" fill="none" opacity="0.8">
+                            <rect x="110" y="12" width="15" height="15" rx="2" />
+                            <rect x="130" y="12" width="15" height="15" rx="2" />
+                            <rect x="150" y="12" width="15" height="15" rx="2" />
+                            <line x1="112" y1="32" x2="125" y2="32" />
+                            <line x1="132" y1="32" x2="145" y2="32" />
+                            <line x1="152" y1="32" x2="165" y2="32" />
+                            <line x1="152" y1="32" x2="165" y2="32" />
+                        </g>
+
+
+
+
+                        <!-- <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200"> -->
+                        <defs>
+                            <!-- Gradient with built-in animation -->
+                            <linearGradient id="mottoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#60a5fa" />
+                                <stop offset="30%" stop-color="#3b82f6" />
+                                <stop offset="60%" stop-color="#1e40af" />
+                                <stop offset="100%" stop-color="#60a5fa" />
+                                <!-- Animate gradient position -->
+                                <animate attributeName="x1" values="0%;100%;0%" dur="6s" repeatCount="indefinite" />
+                                <animate attributeName="x2" values="100%;0%;100%" dur="6s" repeatCount="indefinite" />
+                            </linearGradient>
+
+                            <!-- Glow effect -->
+                            <filter id="mottoGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <g class="motto-group" text-anchor="middle" font-size="32" font-family="Orbitron, sans-serif"
+                            font-weight="bold">
+                            <text x="150" y="80" fill="url(#mottoGradient)" filter="url(#mottoGlow)">THINK</text>
+                            <line x1="200" y1="60" x2="260" y2="60" stroke="url(#mottoGradient)" stroke-width="2" />
+                            <text x="320" y="80" fill="url(#mottoGradient)" filter="url(#mottoGlow)">DREAM</text>
+                            <polygon points="370,45 390,60 370,75" fill="url(#mottoGradient)" />
+                            <text x="460" y="80" fill="url(#mottoGradient)" filter="url(#mottoGlow)">WE MAKE</text>
+                        </g>
+                        <!-- </svg> -->
+                    </svg>
+                   
+
+                </div>
+
+
+                <ul class="nav-menu">
+                    <li><a href="#services" class="nav-link">Solutions</a></li>
+                    <!-- <li><a href="#services" class="nav-link">Services</a></li> -->
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+
+                <button class="mobile-menu-btn">☰</button>
+                <button class="cta-nav" onclick="openModal()">Get Consultation</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Transform Your Business with <span class="accent">Strategic Excellence</span></h1>
+                    <p class="hero-subtitle">Premium IT Consulting & Digital Architecture</p>
+                    <p class="hero-description">We partner exclusively with visionary enterprises to architect,
+                        implement,
+                        and optimize transformative technology solutions that redefine industry standards and drive
+                        unprecedented growth.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="openModal()">Schedule Strategic Consultation</button>
+                        <a href="#services" class="btn-secondary">Explore Capabilities</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="premium-grid">
+                        <div class="grid-bg"></div>
+
+                        <div class="floating-card"
+                            style="top: 10%; left: 10%; animation: float 6s ease-in-out infinite;">
+                            <svg class="card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="8" width="40" height="32" rx="4" stroke="#3b82f6" stroke-width="2" />
+                                <path d="M12 20h8v8h-8z" fill="#3b82f6" opacity="0.7" />
+                                <path d="M28 20h8v4h-8z" fill="#60a5fa" opacity="0.7" />
+                                <path d="M28 28h8v4h-8z" fill="#93c5fd" opacity="0.7" />
+                            </svg>
+                            <div class="card-title">Cloud Infrastructure</div>
+                            <div class="card-value">99.9%</div>
+                        </div>
+
+                        <div class="floating-card"
+                            style="top: 10%; right: 10%; animation: float 6s ease-in-out infinite 1s;">
+                            <svg class="card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="20" stroke="#3b82f6" stroke-width="2" />
+                                <path d="M14 24c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="#60a5fa" stroke-width="2"
+                                    fill="none" />
+                                <circle cx="24" cy="24" r="6" fill="#93c5fd" opacity="0.7" />
+                                <circle cx="24" cy="24" r="2" fill="#3b82f6" />
+                            </svg>
+                            <div class="card-title">AI Analytics</div>
+                            <div class="card-value">95%</div>
+                        </div>
+
+                        <div class="floating-card"
+                            style="bottom: 10%; left: 20%; animation: float 6s ease-in-out infinite 2s;">
+                            <svg class="card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="6" y="6" width="36" height="36" rx="6" stroke="#3b82f6" stroke-width="2" />
+                                <path d="M24 16v16m-8-8h16" stroke="#60a5fa" stroke-width="2" />
+                                <circle cx="16" cy="16" r="2" fill="#93c5fd" />
+                                <circle cx="32" cy="16" r="2" fill="#93c5fd" />
+                                <circle cx="24" cy="32" r="2" fill="#3b82f6" />
+                            </svg>
+                            <div class="card-title">Security</div>
+                            <div class="card-value">100%</div>
+                        </div>
+
+                        <div class="floating-card"
+                            style="bottom: 10%; right: 20%; animation: float 6s ease-in-out infinite 3s;">
+                            <svg class="card-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 16h32l-4 24H12L8 16z" stroke="#3b82f6" stroke-width="2" fill="none" />
+                                <path d="M8 16L6 8H2" stroke="#60a5fa" stroke-width="2" />
+                                <circle cx="18" cy="44" r="2" fill="#93c5fd" />
+                                <circle cx="30" cy="44" r="2" fill="#93c5fd" />
+                                <path d="M16 20h16v8H16z" fill="#3b82f6" opacity="0.3" />
+                            </svg>
+                            <div class="card-title">ROI Growth</div>
+                            <div class="card-value">340%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Executive-Grade Solutions</h2>
+                <p class="section-subtitle">Bespoke technology strategies and implementations designed exclusively for
+                    enterprise leaders who demand excellence and measurable results.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="16" width="56" height="40" rx="8" stroke="#3b82f6" stroke-width="3" />
+                        <path d="M20 32h32v16H20z" fill="#3b82f6" opacity="0.2" />
+                        <path d="M28 24h16v4h-16z" fill="#60a5fa" opacity="0.7" />
+                        <circle cx="16" cy="8" r="4" fill="#93c5fd" />
+                        <circle cx="36" cy="8" r="4" fill="#93c5fd" />
+                        <circle cx="56" cy="8" r="4" fill="#93c5fd" />
+                        <path d="M16 12v4m20-4v4m20-4v4" stroke="#3b82f6" stroke-width="2" />
+                    </svg>
+                    <h3>Enterprise Cloud Architecture</h3>
+                    <p>Comprehensive cloud transformation strategies with multi-cloud orchestration, advanced security
+                        frameworks, and scalable infrastructure designed for Fortune 500 operations.</p>
+                    <ul class="service-features">
+                        <li>Strategic cloud migration roadmaps</li>
+                        <li>Hybrid & multi-cloud architecture</li>
+                        <li>Enterprise-grade security implementation</li>
+                        <li>24/7 premium support & monitoring</li>
+                        <li>Cost optimization & governance</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="36" cy="36" r="28" stroke="#3b82f6" stroke-width="3" />
+                        <circle cx="36" cy="36" r="20" stroke="#60a5fa" stroke-width="2" />
+                        <circle cx="36" cy="36" r="12" fill="#93c5fd" opacity="0.3" />
+                        <circle cx="36" cy="36" r="4" fill="#3b82f6" />
+                        <path d="M16 16l8 8m32-8l-8 8m8 32l-8-8m-32 8l8-8" stroke="#3b82f6" stroke-width="2" />
+                        <circle cx="16" cy="16" r="3" fill="#60a5fa" />
+                        <circle cx="56" cy="16" r="3" fill="#60a5fa" />
+                        <circle cx="56" cy="56" r="3" fill="#60a5fa" />
+                        <circle cx="16" cy="56" r="3" fill="#60a5fa" />
+                    </svg>
+                    <h3>Cybersecurity & Risk Management</h3>
+                    <p>Executive-level security strategies featuring zero-trust architecture, advanced threat
+                        intelligence,
+                        and comprehensive compliance frameworks for regulated industries.</p>
+                    <ul class="service-features">
+                        <li>Zero-trust security architecture</li>
+                        <li>Advanced threat detection & response</li>
+                        <li>Regulatory compliance (SOX, HIPAA, GDPR)</li>
+                        <li>Executive security briefings</li>
+                        <li>Incident response & recovery planning</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="20" width="56" height="32" rx="4" stroke="#3b82f6" stroke-width="3" />
+                        <path d="M16 28h40v8H16z" fill="#3b82f6" opacity="0.2" />
+                        <path d="M16 40h24v4H16z" fill="#60a5fa" opacity="0.7" />
+                        <path d="M44 40h12v4H44z" fill="#93c5fd" opacity="0.7" />
+                        <circle cx="20" cy="12" r="4" stroke="#3b82f6" stroke-width="2" />
+                        <circle cx="36" cy="12" r="4" stroke="#60a5fa" stroke-width="2" />
+                        <circle cx="52" cy="12" r="4" stroke="#93c5fd" stroke-width="2" />
+                        <path d="M20 16v4m16-4v4m16-4v4" stroke="#3b82f6" stroke-width="2" />
+                        <path d="M20 56v4m16-4v4m16-4v4" stroke="#3b82f6" stroke-width="2" />
+                    </svg>
+                    <h3>AI-Driven Business Intelligence</h3>
+                    <p>Advanced analytics platforms with machine learning integration, predictive modeling, and
+                        executive
+                        dashboards that transform data into strategic competitive advantages.</p>
+                    <ul class="service-features">
+                        <li>Custom AI & machine learning models</li>
+                        <li>Predictive analytics & forecasting</li>
+                        <li>Executive dashboard development</li>
+                        <li>Real-time business intelligence</li>
+                        <li>Data governance & quality assurance</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 36c0-13.3 10.7-24 24-24s24 10.7 24 24" stroke="#3b82f6" stroke-width="3"
+                            fill="none" />
+                        <path d="M20 36c0-8.8 7.2-16 16-16s16 7.2 16 16" stroke="#60a5fa" stroke-width="2"
+                            fill="none" />
+                        <circle cx="36" cy="36" r="8" fill="#93c5fd" opacity="0.3" />
+                        <circle cx="36" cy="36" r="3" fill="#3b82f6" />
+                        <rect x="24" y="48" width="24" height="16" rx="4" stroke="#3b82f6" stroke-width="2" />
+                        <path d="M28 56h16v4H28z" fill="#60a5fa" opacity="0.7" />
+                        <circle cx="16" cy="24" r="2" fill="#3b82f6" />
+                        <circle cx="56" cy="24" r="2" fill="#3b82f6" />
+                        <circle cx="12" cy="48" r="2" fill="#60a5fa" />
+                        <circle cx="60" cy="48" r="2" fill="#60a5fa" />
+                    </svg>
+                    <h3>Digital Transformation Strategy</h3>
+                    <p>End-to-end digital transformation consulting with process optimization, technology integration,
+                        and
+                        change management designed for sustainable competitive advantage.</p>
+                    <ul class="service-features">
+                        <li>Strategic digital roadmap development</li>
+                        <li>Process automation & optimization</li>
+                        <li>Legacy system modernization</li>
+                        <li>Change management & training</li>
+                        <li>Performance measurement & KPIs</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="16" width="56" height="40" rx="6" stroke="#3b82f6" stroke-width="3" />
+                        <path d="M16 28h40v20H16z" fill="#3b82f6" opacity="0.1" />
+                        <rect x="20" y="32" width="8" height="12" fill="#3b82f6" opacity="0.7" />
+                        <rect x="32" y="36" width="8" height="8" fill="#60a5fa" opacity="0.7" />
+                        <rect x="44" y="28" width="8" height="16" fill="#93c5fd" opacity="0.7" />
+                        <path d="M8 16L4 8h8l-4 8z" stroke="#3b82f6" stroke-width="2" />
+                        <path d="M64 16l4-8h-8l4 8z" stroke="#3b82f6" stroke-width="2" />
+                        <circle cx="36" cy="8" r="3" fill="#60a5fa" />
+                        <circle cx="36" cy="64" r="3" fill="#60a5fa" />
+                    </svg>
+                    <h3>Enterprise Integration Solutions</h3>
+                    <p>Seamless integration of complex enterprise systems, API management, and data orchestration
+                        platforms
+                        that unify business operations and enhance productivity.</p>
+                    <ul class="service-features">
+                        <li>ERP & CRM system integration</li>
+                        <li>API management & orchestration</li>
+                        <li>Data pipeline development</li>
+                        <li>Microservices architecture</li>
+                        <li>Real-time synchronization</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="36" cy="36" r="28" stroke="#3b82f6" stroke-width="3" />
+                        <path d="M20 36h32" stroke="#60a5fa" stroke-width="2" />
+                        <path d="M36 20v32" stroke="#60a5fa" stroke-width="2" />
+                        <circle cx="28" cy="28" r="4" fill="#93c5fd" opacity="0.7" />
+                        <circle cx="44" cy="28" r="4" fill="#93c5fd" opacity="0.7" />
+                        <circle cx="28" cy="44" r="4" fill="#93c5fd" opacity="0.7" />
+                        <circle cx="44" cy="44" r="4" fill="#93c5fd" opacity="0.7" />
+                        <circle cx="36" cy="36" r="6" fill="#3b82f6" opacity="0.5" />
+                        <path d="M12 12l8 8m32-8l-8 8m8 32l-8-8m-32 8l8-8" stroke="#3b82f6" stroke-width="2" />
+                    </svg>
+                    <h3>Strategic Technology Consulting</h3>
+                    <p>C-suite advisory services for technology strategy, digital roadmap development, and technology
+                        investment optimization with measurable business impact.</p>
+                    <ul class="service-features">
+                        <li>Technology strategy development</li>
+                        <li>Digital roadmap & planning</li>
+                        <li>Technology investment analysis</li>
+                        <li>Vendor selection & management</li>
+                        <li>Executive technology briefings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Trusted by Industry Leaders</h2>
+                    <p>For many years, WMEK has been the strategic technology partner of choice for Fortune
+                        companies and visionary enterprises. We combine unparalleled technical expertise with
+                        executive-level business acumen to deliver transformative solutions that create lasting
+                        competitive
+                        advantages.</p>
+                    <p>Our team of principal consultants and certified architects brings deep industry experience across
+                        sectors, ensuring your technology investments align perfectly with your strategic objectives and
+                        deliver measurable, sustainable results that exceed stakeholder expectations.</p>
+                    <button class="btn-primary" onclick="openModal()">Partner With Excellence</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">1,200+</span>
+                        <span class="stat-label">Enterprise Projects</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">99.98%</span>
+                        <span class="stat-label">Uptime Achievement</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">180M+</span>
+                        <span class="stat-label">Client Cost Savings</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Premium Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Lead Your Industry?</h2>
+                <p>Schedule an executive consultation with our principal strategists and discover how we can architect
+                    your
+                    competitive advantage through strategic technology transformation.</p>
+                <button class="btn-primary" onclick="openModal()">Schedule Executive Consultation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Modal -->
+    <div id="consultationModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h3 class="modal-title">Schedule Your Strategic Consultation</h3>
+                <p class="modal-subtitle">Connect with our principal consultants to discuss your transformation
+                    objectives
+                </p>
+                <br>
+                <p></p>
+                <code
+                    style="border-radius: 5px; border-color: #3b82f6; border-style: dashed;padding: 2px; box-shadow: rgba(255, 255, 255, 0.08);">THINK | DREAM > WE MAKE</code>
+                </p>
+            </div>
+
+            <form id="consultationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name *</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name *</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email Address *</label>
+                        <input type="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Company *</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Job Title *</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Primary Interest *</label>
+                    <select class="form-select" required>
+                        <option value="">Select a service area</option>
+                        <option value="cloud">Enterprise Cloud Architecture</option>
+                        <option value="security">Cybersecurity & Risk Management</option>
+                        <option value="ai">AI-Driven Business Intelligence</option>
+                        <option value="transformation">Digital Transformation Strategy</option>
+                        <option value="integration">Enterprise Integration Solutions</option>
+                        <option value="consulting">Strategic Technology Consulting</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Project Timeline</label>
+                    <select class="form-select ">
+                        <option value="">Select timeline</option>
+                        <option value="immediate">Immediate (0-3 months)</option>
+                        <option value="near">Near-term (3-6 months)</option>
+                        <option value="planning">Strategic Planning (6-12 months)</option>
+                        <option value="future">Future Consideration (12+ months)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Project Scope & Objectives</label>
+                    <textarea class="form-textarea"
+                        placeholder="Please describe your technology challenges, objectives, and expected outcomes..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Schedule Consultation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+     <!-- Luxury Motto Component -->
+                    <div class="motto-symphony">
+                        <div class="luxury-motto">
+                            <span class="motto-word think">THINK</span>
+                            <span class="motto-word separator">|</span>
+                            <span class="motto-word dream">DREAM</span>
+                            <span class="motto-word arrow">></span>
+                            <span class="motto-word we-make">WE MAKE</span>
+                        </div>
+                    </div>
+
+</body>
+
+<!-- Footer -->
+<footer id="contact" class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>WMEK Consulting</h3>
+                <p>Your exclusive partner for enterprise technology transformation. We architect strategic solutions
+                    that redefine industry standards and create sustainable competitive advantages through innovative
+                    technology implementation.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">@</a>
+                    <a href="#" class="social-link">f</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Cloud Architecture</a></li>
+                    <li><a href="#">Cybersecurity</a></li>
+                    <li><a href="#">AI & Analytics</a></li>
+                    <li><a href="#">Digital Transformation</a></li>
+                    <li><a href="#">Enterprise Integration</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Leadership Team</a></li>
+                    <li><a href="#">Partnerships</a></li>
+                    <li><a href="#">Insights</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <div class="contact-info">
+                    <p>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        consulting@wmek.com
+                    </p>
+                    <p>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                        +1 (555) 847-2863
+                    </p>
+                    <p>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        New York, NY | London, UK
+                    </p>
+                    <p>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        wmek-consulting.com
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 WMEK Consulting. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Premium particle system
+    let scene, camera, renderer, particles;
+
+    function initThree() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create sophisticated particle network
+        const geometry = new THREE.BufferGeometry();
+        const particleCount = 600;
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 2000;
+            positions[i + 1] = (Math.random() - 0.5) * 2000;
+            positions[i + 2] = (Math.random() - 0.5) * 1000;
+
+            // Premium blue gradient
+            const intensity = Math.random() * 0.4 + 0.4;
+            colors[i] = intensity * 0.2; // Red
+            colors[i + 1] = intensity * 0.5; // Green  
+            colors[i + 2] = intensity; // Blue
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 8,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        camera.position.z = 1000;
+        animate();
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        particles.rotation.x += 0.0002;
+        particles.rotation.y += 0.0005;
+
+        const positions = particles.geometry.attributes.position.array;
+        for (let i = 0; i < positions.length; i += 3) {
+            positions[i + 1] += Math.sin(Date.now() * 0.001 + i * 0.005) * 0.02;
+        }
+        particles.geometry.attributes.position.needsUpdate = true;
+
+        renderer.render(scene, camera);
+    }
+
+
+    // Modal functionality
+    function openModal() {
+        document.getElementById('consultationModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('consultationModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on overlay click
+    document.getElementById('consultationModal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    // Form submission
+    document.getElementById('consultationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Simulate form submission
+        const submitBtn = this.querySelector('.btn-primary');
+        const originalText = submitBtn.textContent;
+
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            submitBtn.textContent = 'Consultation Scheduled!';
+            submitBtn.style.background = 'linear-gradient(135deg, #10b981, #34d399)';
+
+            setTimeout(() => {
+                closeModal();
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.background = '';
+            }, 2000);
+        }, 1500);
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Enhanced navbar on scroll
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar, {.modal-overlay}');
+        const scrolled = window.pageYOffset;
+
+        if (scrolled > 50) {
+            navbar.style.background = 'rgba(8, 8, 12, 0.98)';
+            navbar.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+        } else {
+            navbar.style.background = 'rgba(8, 8, 12, 0.92)';
+            navbar.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+        }
+    });
+
+    // Floating cards animation
+    const style = document.createElement('style');
+    style.textContent = `
+            @keyframes float {
+                0%, 100% { 
+                    transform: translateY(0px) rotate(0deg);
+                    opacity: 0.8;
+                }
+                25% { 
+                    transform: translateY(-10px) rotate(1deg);
+                    opacity: 0.9;
+                }
+                50% { 
+                    transform: translateY(-20px) rotate(0deg);
+                    opacity: 1;
+                }
+                75% { 
+                    transform: translateY(-10px) rotate(-1deg);
+                    opacity: 0.9;
+                }
+            }
+            
+            .floating-card:hover {
+                animation-play-state: paused;
+            }
+        `;
+    document.head.appendChild(style);
+
+    // Service cards animation on scroll
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 150);
+            }
+        });
+    }, observerOptions);
+
+    // Initialize service card animations
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px)';
+        card.style.transition = 'all 0.8s ease-out';
+        observer.observe(card);
+    });
+
+    // Stats animation
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const number = entry.target.querySelector('.stat-number');
+                const finalText = number.textContent;
+
+                if (finalText.includes('%')) {
+                    const num = parseFloat(finalText.replace('%', ''));
+                    animateNumber(number, 0, num, '%');
+                } else if (finalText.includes('M+')) {
+                    const num = parseInt(finalText.replace('M+', ''));
+                    animateNumber(number, 0, num, 'M+');
+                } else if (finalText.includes('+')) {
+                    const num = parseInt(finalText.replace(/[^0-9]/g, ''));
+                    animateNumber(number, 0, num, '+');
+                } else {
+                    number.style.opacity = '1';
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-card').forEach(card => {
+        statsObserver.observe(card);
+    });
+
+    function animateNumber(element, start, end, suffix) {
+        const duration = 2500;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            const current = start + (end - start) * easeOutCubic(progress);
+
+            if (suffix === '%') {
+                element.textContent = current.toFixed(2) + suffix;
+            } else if (suffix === 'M+') {
+                element.textContent = Math.floor(current) + suffix;
+            } else {
+                element.textContent = Math.floor(current).toLocaleString() + suffix;
+            }
+
+            if (progress < 1) { requestAnimationFrame(update); }
+        } requestAnimationFrame(update);
+    }
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); } // Premium button
+    document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+        btn.addEventListener('mouseenter', function () {
+            this.style.transform = 'translateY(-3px) scale(1.02)';
+        });
+
+        btn.addEventListener('mouseleave', function () {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+
+        btn.addEventListener('click', function (e) {
+            if (!this.disabled) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.cssText = `
+                                position: absolute;
+                                left: ${x}px;
+                                top: ${y}px;
+                                width: ${size}px;
+                                height: ${size}px;
+                                background: rgba(255, 255, 255, 0.3);
+                                border-radius: 50%;
+                                transform: scale(0);
+                                animation: ripple-effect 0.6s ease-out;
+                                pointer-events: none;
+                                `;
+
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+        });
+    });
+
+    // Add ripple animation
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+                                @keyframes ripple-effect {
+                                to {
+                                transform: scale(2);
+                                opacity: 0;
+                                }
+                                }
+
+                                .btn-primary, .btn-secondary {
+                                position: relative;
+                                overflow: hidden;
+                                }
+                                `;
+    document.head.appendChild(rippleStyle);
+
+    // Mobile menu functionality
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = navMenu.style.display === 'flex';
+        navMenu.style.display = isOpen ? 'none' : 'flex';
+
+        if (!isOpen) {
+            navMenu.style.cssText = `
+                                display: flex;
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                right: 0;
+                                background: rgba(8, 8, 12, 0.98);
+                                flex-direction: column;
+                                padding: 2rem;
+                                gap: 2rem;
+                                border-top: 1px solid rgba(59, 130, 246, 0.2);
+                                backdrop-filter: blur(40px);
+                                `;
+        }
+    });
+
+    // Initialize everything
+    initThree();
+
+    // Resize handler
+    window.addEventListener('resize', () => {
+        if (camera && renderer) {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Close mobile menu on resize
+        if (window.innerWidth > 768) {
+            navMenu.style.display = '';
+        }
+    });
+
+    // Keyboard navigation for modal
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // Form validation enhancement
+    document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(input => {
+        input.addEventListener('blur', function () {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                this.style.borderColor = '#ef4444';
+            } else {
+                this.style.borderColor = '';
+            }
+        });
+
+        input.addEventListener('focus', function () {
+            this.style.borderColor = '#3b82f6';
+        });
+    });
+
+    // Smooth reveal for footer
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const footer = document.querySelector('.footer');
+    footer.style.opacity = '0';
+    footer.style.transform = 'translateY(30px)';
+    footer.style.transition = 'all 1s ease-out';
+    footerObserver.observe(footer);
+</script>
