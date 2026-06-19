@@ -1,11 +1,10 @@
-</html>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WMEK - Premium IT Consulting & Digital Transformation</title>
+    <title>WMEK IT - Premium IT Consulting & Digital Transformation</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
@@ -1545,39 +1544,39 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">First Name *</label>
-                        <input type="text" class="form-input" required>
+                        <input type="text" class="form-input" name="firstName" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Last Name *</label>
-                        <input type="text" class="form-input" required>
+                        <input type="text" class="form-input" name="lastName" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Email Address *</label>
-                        <input type="email" class="form-input" required>
+                        <input type="email" class="form-input" name="email" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Phone Number</label>
-                        <input type="tel" class="form-input">
+                        <input type="tel" class="form-input" name="phone">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Company *</label>
-                        <input type="text" class="form-input" required>
+                        <input type="text" class="form-input" name="company" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Job Title *</label>
-                        <input type="text" class="form-input" required>
+                        <input type="text" class="form-input" name="jobTitle" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Primary Interest *</label>
-                    <select class="form-select" required>
+                    <select class="form-select" name="interest" required>
                         <option value="">Select a service area</option>
                         <option value="cloud">Enterprise Cloud Architecture</option>
                         <option value="security">Cybersecurity & Risk Management</option>
@@ -1590,7 +1589,7 @@
 
                 <div class="form-group">
                     <label class="form-label">Project Timeline</label>
-                    <select class="form-select ">
+                    <select class="form-select" name="timeline">
                         <option value="">Select timeline</option>
                         <option value="immediate">Immediate (0-3 months)</option>
                         <option value="near">Near-term (3-6 months)</option>
@@ -1601,7 +1600,7 @@
 
                 <div class="form-group">
                     <label class="form-label">Project Scope & Objectives</label>
-                    <textarea class="form-textarea"
+                    <textarea class="form-textarea" name="message"
                         placeholder="Please describe your technology challenges, objectives, and expected outcomes..."></textarea>
                 </div>
 
@@ -1623,21 +1622,18 @@
                             <span class="motto-word we-make">WE MAKE</span>
                         </div>
                     </div>
-
-</body>
-
 <!-- Footer -->
 <footer id="contact" class="footer">
     <div class="container">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>WMEK Consulting</h3>
+                <h3>WMEK IT Consulting</h3>
                 <p>Your exclusive partner for enterprise technology transformation. We architect strategic solutions
                     that redefine industry standards and create sustainable competitive advantages through innovative
                     technology implementation.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link">in</a>
-                    <a href="#" class="social-link">@</a>
+                    <a href="https://wmkeit.shop" class="social-link" aria-label="Website">www</a>
+                    <a href="mailto:consulting@wmekit.shop" class="social-link" aria-label="Email">@</a>
                     <a href="#" class="social-link">f</a>
                 </div>
             </div>
@@ -1673,7 +1669,7 @@
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                             <polyline points="22,6 12,13 2,6" />
                         </svg>
-                        consulting@wmek.xyz
+                        <a href="mailto:consulting@wmekit.shop">consulting@wmekit.shop</a>
                     </p>
                     <p>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1699,14 +1695,14 @@
                             <path
                                 d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                         </svg>
-                        wmek.xyz
+                        <a href="https://wmekit.shop">wmekit.shop</a>
                     </p>
                 </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2025 WMEK Consulting. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2026 WMEK IT Consulting. All rights reserved. | Privacy Policy | Terms of Service</p>
         </div>
     </div>
 </footer>
@@ -1792,24 +1788,42 @@
         }
     });
 
+    const enquiryEmail = 'thatdev@wmekit.shop';
+
     // Form submission
     document.getElementById('consultationForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Simulate form submission
         const submitBtn = this.querySelector('.btn-primary');
         const originalText = submitBtn.textContent;
+        const data = new FormData(this);
+        const fullName = `${data.get('firstName') || ''} ${data.get('lastName') || ''}`.trim();
+        const subject = `Consultation enquiry from ${fullName || 'website visitor'}`;
+        const body = [
+            'New consultation enquiry from wmekit.shop',
+            '',
+            `Name: ${fullName}`,
+            `Email: ${data.get('email') || ''}`,
+            `Phone: ${data.get('phone') || ''}`,
+            `Company: ${data.get('company') || ''}`,
+            `Job Title: ${data.get('jobTitle') || ''}`,
+            `Primary Interest: ${data.get('interest') || ''}`,
+            `Timeline: ${data.get('timeline') || ''}`,
+            '',
+            'Project Scope & Objectives:',
+            data.get('message') || ''
+        ].join('\n');
 
-        submitBtn.textContent = 'Submitting...';
+        submitBtn.textContent = 'Opening Email...';
         submitBtn.disabled = true;
+        window.location.href = `mailto:${enquiryEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         setTimeout(() => {
-            submitBtn.textContent = 'Consultation Scheduled!';
+            submitBtn.textContent = 'Email Draft Opened';
             submitBtn.style.background = 'linear-gradient(135deg, #10b981, #34d399)';
 
             setTimeout(() => {
                 closeModal();
-                this.reset();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 submitBtn.style.background = '';
@@ -2083,3 +2097,5 @@
     footer.style.transition = 'all 1s ease-out';
     footerObserver.observe(footer);
 </script>
+</body>
+</html>
